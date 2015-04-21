@@ -33,18 +33,25 @@
         }
     };
 
+    todo.controller = function() {
+        todo.vm.init();
+    }
 
-    //initialize our view-model
-    todo.vm.init();
+    todo.view = function() {
+        return m("html", [
+            m("input"),
+            m("button", "Add"),
+            m("table", [
+                m("tr", [
+                    m("td", [
+                        m("input[type=checkbox]")
+                    ]),
+                    m("td", "task description"),
+                ])
+            ])
+        ]);
+    }
 
-    console.log(todo.vm.description());  // Should be empty string
+    m.render(document, todo.view());
 
-    // try adding a to-do
-    todo.vm.add(todo.vm.description);
-    console.log(todo.vm.list.length); // Should be 0, because you can't add a to-do with an empty description
-
-    // Add it properly
-    todo.vm.description("Write code");
-    todo.vm.add(todo.vm.description);
-    console.log(todo.vm.list.length); // 1
 </script>
